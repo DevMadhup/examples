@@ -13,4 +13,10 @@
 # limitations under the License.
 
 FROM golang:1.10.0
+WORKDIR /app
+COPY . /app
+RUN go mod download
+RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
+EXPOSE 3000
+CMD ["/app/main"]
 
